@@ -7,27 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class TradutorServlet
- */
-@WebServlet("/TradutorServlet")
+
+@WebServlet("/traduzir")
 public class TradutorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public TradutorServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String palavra = request.getParameter("palavra");
+		Tradutor t = new Tradutor(palavra);
+		String traducao = t.traducao();
+		
+		request.setAttribute("traducao", traducao);
+		request.getRequestDispatcher("Traduzido.jsp").forward(request, response);
 	}
-
 }
