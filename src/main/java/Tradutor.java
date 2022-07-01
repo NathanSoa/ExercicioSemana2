@@ -11,6 +11,7 @@ public class Tradutor {
 	}
 	
 	public String traducao() {
+		String palavraAchada = "Palavra não encontrada";
 		try {
 			Scanner scanner = new Scanner(new File("C:\\palavras.txt"));
 			String linha;
@@ -21,16 +22,17 @@ public class Tradutor {
 				palavras = linha.split("-");
 				
 				if(palavras[0].equalsIgnoreCase(getPalavra())) {
-					return palavras[1];
-				}else {
-					return palavras[0];
+					palavraAchada = palavras[1];
+				}else
+				if (palavras[1].equalsIgnoreCase(getPalavra())){
+					palavraAchada = palavras[0];
 				}
 			}
 			
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "Palavra não encontrada!";
+		return palavraAchada;
 	}
 	
 	public String getPalavra() {
